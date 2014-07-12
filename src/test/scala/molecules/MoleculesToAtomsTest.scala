@@ -6,6 +6,28 @@ import org.scalatest.WordSpec
 class MoleculesToAtomsTest extends WordSpec with ShouldMatchers {
     
     "MoleculesToAtoms" should {
+        """parse "H" from a string containing only "H"""" in {
+            parseElement("H", "") should be (("", Option(Atom("H"))))
+        }
+        
+        """parse "H" from a string containing "H2"""" in {
+            parseElement("H2", "") should be (("2", Option(Atom("H"))))
+        }
+        
+        """parse "Hg" from a string containing "Hg2"""" in {
+            parseElement("Hg2", "") should be (("2", Option(Atom("Hg"))))
+        }
+        
+        """parse "2" from a string containing only "2"""" in {
+            parseNumber("2", "") should be ("", Option(2))
+        }
+
+        """parse "1" from a string containing no digits """ in {
+            parseNumber("N", "") should be ("N", Option(1))
+        }
+
+        
+                
         "count the number of atoms contained in a molecule of H2" in {
             pending
             parseMolecule("H2") should be ("{H: 2}")
